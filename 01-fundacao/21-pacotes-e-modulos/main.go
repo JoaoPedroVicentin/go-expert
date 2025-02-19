@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"go-expert/21-pacotes-e-modulos/soma"
+	"go-expert/01-fundacao/21-pacotes-e-modulos/soma"
 
 	"github.com/google/uuid"
 )
