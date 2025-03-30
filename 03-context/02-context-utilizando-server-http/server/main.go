@@ -21,6 +21,5 @@ func handler(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("Request processada com sucesso"))
 	case <-ctx.Done():
 		log.Println("Request cancelada pelo cliente")
-		http.Error(w, "Request cancelada pelo cliente", http.StatusRequestTimeout)
 	}
 }
