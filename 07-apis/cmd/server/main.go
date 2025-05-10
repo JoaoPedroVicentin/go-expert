@@ -8,12 +8,33 @@ import (
 	"log"
 	"net/http"
 
+	_ "go-expert/07-apis/docs"
+
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 	"github.com/go-chi/jwtauth"
+	httpSwagger "github.com/swaggo/http-swagger"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 )
+
+// @title Go Expert API Example
+// @version 1.0
+// @description Product API with Authentication
+// @termsOfService http://swagger.io/terms/
+
+// @contact.name João Pedro Vicentin
+// @contact.url http://www.fullcycle.com.br
+// @contact.email atendimento@fullcycle.com.br
+
+// @license.name Full Cycle License
+// @license.url http://www.fullcycle.com.br
+
+// @host localhost:8080
+// @BasePath /
+// @securityDefinitions.apikey ApiKeyAuth
+// @in header
+// @name Authorization
 
 func main() {
 	configs, err := configs.LoadConfig(".")
@@ -49,6 +70,8 @@ func main() {
 
 	r.Post("/users", userHandler.CreateUser)
 	r.Post("/users/generate-token", userHandler.GetJwt)
+
+	r.Get("/docs/*", httpSwagger.Handler(httpSwagger.URL("http://localhost:8080/docs/doc.json")))
 
 	http.ListenAndServe(":8080", r)
 }
